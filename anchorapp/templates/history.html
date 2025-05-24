@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section bg-body-tertiary text-secondary-emphasis border-light-subtle">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}  <!-- CRSF secret -->
+        <fieldset class="form-group">
+            <legend class="text-info">Site History</legend>
+            <div class="mb-3">
+                <!-- {{ form.site_id.label(class="form-control-label") }} -->
+                {% if form.site_id.errors %}
+                {{ form.site_id(class="form-control form-control is-invalid fs-4") }}
+                <div class="invalid-feedback">
+                    {% for error in form.site_id.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.site_id(class="form-control") }}
+                {% endif %}
+            </div>
+            {{ form.submit(class="btn btn-outline-info") }}
+        </fieldset>
+    </form>
+</div>
+<div class="content-section bg-body-tertiary text-secondary-emphasis border-light-subtle">
+    <fieldset>
+        <table class="table mw-100">
+            <thead>
+                <tr>
+                    <th class="small text-secondary"> <b>Time</b> </th>
+                    <th class="small text-secondary"> <b>Action</b> </th>
+                    <th class="small text-secondary"> <b>Length</b> </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for event in site_events %}
+                {% if event['is_date'] %}
+                <tr>
+                    <td class="text-info"> {{ event['start_time'] }} </td>
+                    <td class="text-info"> {{ event['action'] }} </td>
+                    <td class="text-info"> {{ event['actual_length'] }} </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td > {{ event['start_time'] }} </td>
+                    <td > {{ event['action'] }} </td>
+                    <td > {{ event['actual_length'] }} </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+{% endblock content %}

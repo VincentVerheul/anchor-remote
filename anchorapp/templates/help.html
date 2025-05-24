@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="col-md-9 bg-body-tertiary text-secondary-emphasis">
+        <h2><span class="text-muted">Help</span> Anchor Remote</h2>
+        <p> This web-app provides a remote control to the anchor windlass.
+            The web-app is hosted on a Raspberri Pi micro computer which is
+            connected to your anchor windlass.
+        </p>
+        <h4 class="text-info">Usage</h4>
+        {% if basic_mode %}
+        <ul>
+            <li> Set a target length based on the depth via the <b>Set</b> button.
+                 Optionally enter the name of the anchoring site when setting the target. </li>
+            <li> Use the <b>Run</b> button. </li>
+            <li> Use <b>Pause</b> during a run to pause the anchor action. </li>
+            <li> Use <b>Resume</b> to continue. The continuation direction (up or down)
+                 is shown next to the button.</li>
+            <li> When you have completed your anchoring operation, use <b>Quit</b> to shut down
+                 the Raspberri Pi micro computer before you power it off. </li>
+        </ul>
+        {% else %}
+        <ul>
+            <li> Set a target length either manually (via Adjust) or use the
+                 <b>Set</b> (target) option to set the target length based on the depth.
+                 Optionally enter the name of the anchoring site when setting the target. </li>
+            <li> Use the <b>Run</b> button. </li>
+            <li> Use <b>Pause</b> during a run to pause the anchor action. </li>
+            <li> Use <b>Resume</b> to continue. The continuation direction (up or down)
+                 is shown next to the button.</li>
+            <li> Before you initiate a run, you may adjust the target and current
+                 chain length and click the <b>Adjust</b> button. </li>
+            <li> To adjust manually, use the <b>Go Up</b> and <b>Down</b> buttons.
+                 The length adjusted is set by the slider; use the <b>Adjust</b> button.
+                 Use <b>Pause</b> to stop the manual run.</li>
+            <li> When you have completed your anchoring operation, use <b>Quit</b> to shut down
+                 the Raspberri Pi micro computer before you power it off. </li>
+        </ul>
+        {% endif %}
+        <p>
+            The <b>History</b> menu option lists events per anchoring site. The history is also
+            shown when you click the anchor site hyperlink on the home page.
+        </p>
+
+        <h4 class="text-info">Target length going up</h4>
+        <p> The target minimum length when pulling the anchor up is set to {{ min_length_up }} meter.
+            This is a safety measure because the acual deployed chain length is only an estimate.
+            Pull the anchor all the way up manually.
+        </p>
+
+        <h4 class="text-info">Configuration</h4>
+        <p> You must specify some settings relevant to your boat. Select the <b>Config</b> menu
+            and select your boat. Choose <b>add boat</b> when your boat (name) is not listed.
+            Set the boat-independent anchor values and select the page layout: basic mode or full-featured.
+            Adjust the time zone relative to your home time zone: positive going east, negative going west.
+        </p>
+        <p>
+            Use the <b>Boat</b> menu to specify your boat settings. Enter boat type (for information only)
+            and boat name (for reference). Complete the other settings. Start with an estimated
+            anchor down and up speed (in meter per minute) and carry out an anchor manouvre where
+            you measure the actual (average) speeds. Update the settings with the new values.
+        </p>
+
+        <p>
+            The <b>Theme</b> menu option switches between a light and dark theme.
+        </p>
+
+        <h4 class="text-info">Raspberri Pi - WiFi</h4>
+        <p> The Raspberri Pi (Rpi) connects to the up- and down controls of
+            the windlass. The Rpi broadcasts a WiFi signal that you must select
+            on your mobile phone. It is called 'AnchorRemote'. You will need
+            a password to connect. Access the web application via the
+            rpi5.local (rpi5 is the hostname of the Raspberri Pi).
+        </p>
+    </div>
+
+{% endblock content %}

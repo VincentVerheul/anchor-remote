@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section bg-body-tertiary text-secondary-emphasis border-light-subtle">
+    <div>
+        <h4 class="account-heading text-info">Config App</h4>
+    </div>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-md-4">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Select boat</legend>
+                    <div class="mb-3">
+                        {{ form.boat_id(class="form-control", type="none") }}
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-4">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Anchor</legend>
+                    <div class="mb-3 form-check form-switch" title = "Disable when not safe to go up unmonitored">
+                        {{ form.allow_achor_up.label(class="form-check-label") }} &nbsp &nbsp
+                        {{ form.allow_achor_up(class="form-check-input") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.min_length_up.label(class="form-control-label") }}
+                        {% if form.min_length_up.errors %}
+                            {{ form.min_length_up(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.min_length_up.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.min_length_up(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.max_manual_range.label(class="form-control-label") }}
+                        {% if form.max_manual_range.errors %}
+                            {{ form.max_manual_range(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.max_manual_range.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.max_manual_range(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-4">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Control Mode</legend>
+                    <div class="mb-3 form-check form-switch">
+                        {{ form.basic_mode.label(class="form-check-label") }} &nbsp &nbsp
+                        {{ form.basic_mode(class="form-check-input") }}
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-4">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Time Zone Adjust</legend>
+                    <div class="mb-3">
+                        {{ form.tz_hour_adjust.label(class="form-control-label") }}
+                        {% if form.tz_hour_adjust.errors %}
+                            {{ form.tz_hour_adjust(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.tz_hour_adjust.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.tz_hour_adjust(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-4">
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">CPU temperature</legend>
+                    <div class="mb-3">
+                        {{ form.cpu_temp_target.label(class="form-control-label") }}
+                        {% if form.cpu_temp_target.errors %}
+                            {{ form.cpu_temp_target(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.cpu_temp_target.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.cpu_temp_target(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.cpu_temp_high.label(class="form-control-label") }}
+                        {% if form.cpu_temp_high.errors %}
+                            {{ form.cpu_temp_high(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.cpu_temp_high.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.cpu_temp_high(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

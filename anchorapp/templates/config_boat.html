@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section bg-body-tertiary text-secondary-emphasis border-light-subtle">
+    <div>
+        <h4 class="account-heading text-info">Boat settings</h4>
+    </div>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col-md-4">
+                <fieldset class="form-group">
+                    <!-- <legend class="border-bottom mb-4">Boat</legend> -->
+                    <div class="mb-3">
+                        {{ form.boat_make.label(class="form-control-label") }} <br>
+                        {{ form.boat_make(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.boat_name.label(class="form-control-label") }} <br>
+                        {{ form.boat_name(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.boat_draught.label(class="form-control-label") }} <br>
+                        {% if form.boat_draught.errors %}
+                            {{ form.boat_draught(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.boat_draught.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.boat_draught(class="form-control w-50") }}
+                        {% endif %}
+                    </div>                    
+                    <div class="mb-3">
+                        {{ form.boat_length.label(class="form-control-label") }} <br>
+                        {% if form.boat_length.errors %}
+                            {{ form.boat_length(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.boat_length.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.boat_length(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-md-4">
+                <fieldset class="form-group">
+                    <!-- <legend class="border-bottom mb-4">Anchor</legend> -->
+                    <div class="mb-3">
+                        {{ form.chain_length.label(class="form-control-label") }} <br>
+                        {% if form.chain_length.errors %}
+                            {{ form.chain_length(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.chain_length.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.chain_length(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.down_speed.label(class="form-control-label") }} <br>
+                        {% if form.down_speed.errors %}
+                            {{ form.down_speed(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.down_speed.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.down_speed(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.up_speed.label(class="form-control-label") }} <br>
+                        {% if form.up_speed.errors %}
+                            {{ form.up_speed(class="form-control form-control is-invalid ") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.up_speed.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.up_speed(class="form-control w-50") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+{% endblock content %}

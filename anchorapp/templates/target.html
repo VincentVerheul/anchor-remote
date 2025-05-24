@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section bg-body-tertiary text-secondary-emphasis border-light-subtle">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="row g-3">
+            <div class="col-md-4">
+                <fieldset class="form-group">
+                    <legend class="text-info">Anchor Depth</legend>
+                    <div class="mb-3">
+                        {{ form.anchor_depth.label(class="form-control-label") }}
+                        {% if form.anchor_depth.errors %}
+                        {{ form.anchor_depth(class="form-control form-control is-invalid fs-4") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.anchor_depth.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.anchor_depth(class="form-control fs-2 w-50") }}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3 form-check form-switch">
+                        {{ form.add_safety.label(class="form-check-label") }}  &nbsp &nbsp
+                        {{ form.add_safety(class="form-check-input") }}
+                    </div>
+                    <div class="mb-3 form-check form-switch">
+                        {{ form.go_anchor_up.label(class="form-check-label") }}  &nbsp &nbsp
+                        {{ form.go_anchor_up(class="form-check-input") }}
+                    </div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <legend class="text-info">Site</legend>
+                    <div class="mb-3">
+                        {{ form.exist_site_id.label(class="form-control-label") }}
+                        {{ form.exist_site_id(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.refname.label(class="form-control-label") }}
+                        {% if form.refname.errors %}
+                        {{ form.refname(class="form-control form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.refname.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="mb-3">
+                            {{ form.refname(class="form-control") }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.comment.label(class="form-control-label") }}
+                        {{ form.comment(class="form-control") }}
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info mb-3") }}
+        </div>
+    </form>
+</div>
+{% endblock content %}

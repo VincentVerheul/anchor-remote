@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- basic layout -->
+<div class="content-section bg-body-tertiary text-secondary-emphasis border-light-subtle">
+    <fieldset class="form-group">
+        <p>
+            <span class="text-info">Target is {{ target }} m</span>
+            <span class="float-end">
+                &nbsp
+                <a href="{{ url_for('main.history') }}"> {{ site }} </a>
+            </span>
+        </p>
+        <div class="mb-3">
+            <label class="form-control-label" for="actual_length">Actual length (m)</label>
+            <input id="actual_length" type="text" value='' class="form-control fs-2 w-50" readonly>
+        </div>
+    </fieldset>
+    <fieldset class="form-group border-light-subtle">
+        {% if control %}
+            {% if set_ok %}
+                <a class="btn btn-primary" href="{{ url_for('main.set_target') }}">Set</a>
+            {% else %}
+                <a class="btn btn-outline-info" href="{{ url_for('main.set_target') }}">Set</a>
+            {% endif %}
+        {% else %}
+            <a class="btn btn-outline-secondary" href="{{ url_for('main.control', action='info') }}">Set</a>
+        {% endif %}
+    </fieldset>
+</div>
+
+{% if control %}
+<div class="content-section bg-body-tertiary border-light-subtle">
+    <fieldset class="form-group">
+        <p class="text-info">Control</p>
+        <!-- <p class="text-secondary">Pause and resume at any time. Quit before power off.</p>  -->
+        {% if pause_ok %}
+            <a class="btn btn-lg btn-primary" href="{{ url_for('main.anchor', action='pause') }}">&nbsp Pause &nbsp</a>
+        {% else %}
+            <a class="btn btn-lg btn-outline-info" href="{{ url_for('main.anchor', action='pause') }}">&nbsp Pause &nbsp</a>
+        {% endif %}
+
+        {% if direction_img %}
+          &nbsp &nbsp &nbsp &nbsp &nbsp <img src="{{ direction_img }}" alt="up">
+        {% endif %}
+
+        {% if run_ok %}
+            <a class="btn btn-lg btn-primary float-end" href="{{ url_for('main.anchor', action='resume') }}">&nbsp &nbsp Run &nbsp &nbsp</a>
+        {% elif resume_ok %}
+            <a class="btn btn-lg btn-primary float-end" href="{{ url_for('main.anchor', action='resume') }}">Resume</a>
+        {% else %}
+            <a class="btn btn-lg btn-outline-info float-end" href="{{ url_for('main.anchor', action='resume') }}">Resume</a>
+        {% endif %}
+
+    </fieldset>
+</div>
+
+<div class="content-section bg-body-tertiary border-light-subtle">
+    <fieldset class="form-group">
+        <p class="text-info">Done</p>
+        <a class="btn btn-outline-info" href="{{ url_for('main.quit_confirm') }}">Quit</a>
+    </fieldset>
+</div>
+{% endif %}
+
+
+<!-- stream event listener -->
+<script type="text/javascript" charset="utf-8">
+    function get_stream() {
+        let source = new EventSource("/stream_actual");
+        source.onmessage = function (event) {
+            // document.getElementById('log').append('<br>stream event' + event.data)
+            if (event.data > -1000) {
+                document.getElementById("actual_length").value = event.data;
+            } else {
+                source.close();
+                window.location.href = "/";
+            }
+        }
+    }
+
+    get_stream()
+
+</script>
+
+{% endblock content %}

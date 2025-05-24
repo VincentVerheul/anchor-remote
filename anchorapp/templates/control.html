@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section bg-body-tertiary text-secondary-emphasis">
+    <fieldset class="form-group">
+        <legend class="text-info">No control</legend>
+        <div class="form-group">
+            <p>
+                Only a single user can control the anchor at any time.
+            </p>
+            <p>
+                You are not authorised to control the anchor because you were not the first
+                to visit this page since the start of the Raspberry pi. Please ask the user who
+                was first and has control to perform the anchor actions.
+            </p>
+            <a class="btn btn-outline-info" href="{{ url_for('main.home') }}">Continue</a>
+        </div>
+    </fieldset>
+</div>
+{% endblock content %}

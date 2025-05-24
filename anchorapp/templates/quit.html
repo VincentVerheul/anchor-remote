@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section bg-body-tertiary text-secondary-emphasis border-light-subtle">
+    <fieldset class="form-group">
+        <legend class="text-info">Quit</legend>
+        <div class="form-group">
+            <p>
+                Use quit to shutdown the Raspberri Pi before power-off
+            </p>
+            <a class="btn btn-outline-info" href="{{ url_for('main.quit_app') }}">Quit</a>
+            <a class="btn btn-outline-info" href="{{ url_for('main.home') }}">Continue</a>
+        </div>
+    </fieldset>
+</div>
+{% endblock content %}

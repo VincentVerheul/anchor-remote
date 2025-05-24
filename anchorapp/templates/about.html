@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="col-md-9 bg-body-tertiary text-secondary-emphasis">
+        <h2><span class="text-muted">About</span> Anchor Remote</h2>
+        <p></p>
+        <h4 class="text-info">Purpose</h4>
+        <p> This application provides an anchor remote control via your mobile phone.
+            The application runs on a Raspberri Pi miniature computer which is connected
+            to your anchor windlass.
+        </p>
+        <h4 class="text-info">Version</h4>
+        <p> This version ({{ version }}) assumes that you do not have a chain counter
+            installed in your windlass. The actual chain length is therefore
+            estimated, based on the number of seconds that the anchor down / up
+            actions were executed. Set the down / up speeds via the boat settings.
+        </p>
+    </div>
+    <div class="col-md-9 bg-body-tertiary text-secondary-emphasis">
+        <h4 class="text-info">CPU temperature</h4>
+        <p> The current CPU temperature is {{ temp_c }} ° Celcius.
+        </p>
+    </div>
+{% endblock content %}
