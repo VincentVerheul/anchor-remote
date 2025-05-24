@@ -2,13 +2,13 @@ import platform
 
 
 class FlaskConfig:
-    SECRET_KEY = '5b47d09bc657f74572e39a84914a267c'
+    SECRET_KEY = '--your-random-secret-key-used-in-CRSF-protection--'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///anchorapp.db'
 
     # Server name and database path
-    prod_server = 'rpi5'
-    db_dev_path = '/Data/Vincent/AnchorRemote/pyAnchor'
-    db_prod_path = '/home/vincent'
+    prod_server = 'rpi5'                                        # update to reflect your setup! (Raspberri Pi system name)
+    db_dev_path = '/user-name/development-path/project-name'    # update to reflect your setup!
+    db_prod_path = '/home/user-name'                            # update to reflect your setup!
 
     @classmethod
     def sqlite_path_and_name(cls, path_only=False, as_info_message=False) -> str:
