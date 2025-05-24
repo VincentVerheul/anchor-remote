@@ -1,0 +1,6 @@
+flask
+flask-wtf
+SQLAlchemy
+Flask-SQLAlchemy
+WTForms
+gpiozero
