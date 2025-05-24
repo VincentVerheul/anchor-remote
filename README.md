@@ -27,7 +27,7 @@ The Flask app supports the following:
 * Do small manual up or down adjustments
 * View the anchor event history (per anchor site)
 * Trigger a controlled shut down of the Raspberri Pi when done
-* 
+
 Single user control
 -------------------
 The Flask app identifies a user only by its IP address (no username), which is the local IP address within the Raspberri WiFi network. The app allows only a single user to have control, others can only view. This will be the first user who accesses the app after startup of the Raspberri pi.
