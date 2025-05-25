@@ -32,7 +32,11 @@ Single user control
 -------------------
 The Flask app identifies a user only by its IP address (no username), which is the local IP address within the Raspberri WiFi network. The app allows only a single user to have control, others can only view. This will be the first user who accesses the app after startup of the Raspberri pi.
 
+CPU temperature control
+-----------------------
+The Flask app includes logic to monitor the CPU temperature and trigger a fan to cool it down. When the relais board has three relais units, two are used for the anchor (up, down) and the third can be used to switch the fan. This is a miniature fan to be mounted on the Raspberri Pi housing.
 Bootstrap HTML styling
+
 ----------------------
 The HTML styling is provided by Bootstrap https://getbootstrap.com Because you may not have access to the Internet during operation, the Bootstrap CSS and JS files are downloaded to local files and saved to the *static* file folder. 
 
@@ -54,3 +58,8 @@ The Python source was developed with version 3.12 and the following Python libra
 * WTForms
 * flask-wtf
 * gpiozero
+
+Note: on the Raspberri Pi, the gpiozero library and flask are pre-installed. Installing gpiozero also in a Python virtual environment resulted in errors. Do not use a virtual environment on the Raspberri Pi. Instead install the SQLAlchemy libraries at operating system level with the following commands:
+
+sudo pip3 install Flask-SQLAlchemy --break-system-packages
+sudo pip3 install SQLAlchemy --break-system-packages
