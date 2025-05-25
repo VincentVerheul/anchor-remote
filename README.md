@@ -61,5 +61,5 @@ The Python source was developed with version 3.12 and the following Python libra
 
 Note: on the Raspberri Pi, the gpiozero library and flask are pre-installed. Installing gpiozero also in a Python virtual environment resulted in errors. Do not use a virtual environment on the Raspberri Pi. Instead install the SQLAlchemy libraries at operating system level with the following commands:
 
-* sudo pip3 install Flask-SQLAlchemy --break-system-packages
 * sudo pip3 install SQLAlchemy --break-system-packages
+* sudo pip3 install Flask-SQLAlchemy --break-system-packages
