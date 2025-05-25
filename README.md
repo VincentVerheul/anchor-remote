@@ -35,8 +35,8 @@ The Flask app identifies a user only by its IP address (no username), which is t
 CPU temperature control
 -----------------------
 The Flask app includes logic to monitor the CPU temperature and trigger a fan to cool it down. When the relais board has three relais units, two are used for the anchor (up, down) and the third can be used to switch the fan. This is a miniature fan to be mounted on the Raspberri Pi housing.
-Bootstrap HTML styling
 
+Bootstrap HTML styling
 ----------------------
 The HTML styling is provided by Bootstrap https://getbootstrap.com Because you may not have access to the Internet during operation, the Bootstrap CSS and JS files are downloaded to local files and saved to the *static* file folder. 
 
