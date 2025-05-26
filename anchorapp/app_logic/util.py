@@ -20,6 +20,7 @@ class Glob:
     site_id = None                     # can always access, also when site is not a current db-record proxy
     site_event = SiteEvent(id=0, site_id=0, action=0)
     site_event_id = None               # can always access, also when site_event is not a current db-record proxy
+    cpu_temp_monitor = False           # update from app_config, can always access
     tz_hour_adjust = 0                 # update from app_config, can always access
     cpu_temp_target = 45               # update from app_config, can always access
     cpu_temp_high = 50                 # update from app_config, can always access
@@ -77,6 +78,7 @@ class Glob:
             if ConfigApp.query.get(1) is None:
                 cls.add_app_config()
             cls.app_config = ConfigApp.query.get(1)
+            cls.cpu_temp_monitor = cls.app_config.cpu_temp_monitor
             cls.tz_hour_adjust = cls.app_config.tz_hour_adjust
             cls.cpu_temp_target = cls.app_config.cpu_temp_target
             cls.cpu_temp_high = cls.app_config.cpu_temp_high
