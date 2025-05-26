@@ -1,6 +1,7 @@
 # anchor-remote
 Raspberri Pi Flask application to remotely control a boat anchor via the WiFi connection to your smartphone
 
+
 Purpose
 -------
 When you rent a (sail) boat and you are short on crew members, the skipper may need to both steer the boat and drop the anchor at the same time. When the boat is not equipped with an anchor remote control, this application may help you out. 
@@ -32,6 +33,11 @@ Single user control
 -------------------
 The Flask app identifies a user only by its IP address (no username), which is the local IP address within the Raspberri WiFi network. The app allows only a single user to have control, others can only view. This will be the first user who accesses the app after startup of the Raspberri pi.
 
+No user login
+-------------
+No user login is required for the Flask app. A login is aleady required to connect your smartphone to the Raspberri WiFi.
+
+
 CPU temperature control
 -----------------------
 The Flask app includes logic to monitor the CPU temperature and trigger a fan to cool it down. When the relais board has three relais units, two are used for the anchor (up, down) and the third can be used to switch the fan. This is a miniature fan to be mounted on the Raspberri Pi housing.
@@ -61,8 +67,8 @@ The Python source was developed with version 3.12 and the following Python libra
 
 Note: on the Raspberri Pi, the gpiozero library and flask are pre-installed. Installing gpiozero also in a Python virtual environment resulted in errors. Do not use a virtual environment on the Raspberri Pi. Instead install the SQLAlchemy libraries at operating system level with the following commands:
 
-* sudo pip3 install SQLAlchemy --break-system-packages
-* sudo pip3 install Flask-SQLAlchemy --break-system-packages
+* ``sudo pip3 install SQLAlchemy --break-system-packages``
+* ``sudo pip3 install Flask-SQLAlchemy --break-system-packages``
 
 Hardware
 --------
@@ -78,3 +84,22 @@ Hardware
 * Optional: PC Fan 25x25x10mm - 5V
 * Optional: Some jump wires to connect the 5 volt pin to the relais to run the PC Fan.
 * Optional: A small circuit breaker (switch) to insert in the connection of the UBEC to the input 5 volt pin of the computer board. If the UBEC is connected to the computer and you use the powerbank to supply power, the computer may not start. Disconnect the UBEC with the switch in that case.
+* Optional: A Linux-compatible WiFi-adapter (like the Ax300 from BrosTrend) if you want to keep the built-in WiFi to hook up to a network and use this additional WiFi adapter as a transmitter (hot-spot).
+
+Configure WiFi as a Hot-spot
+----------------------------
+On the Raspberri Pi (command line) issue the following command to start an interactive WiFi configuration: ``sudo nmtui``
+* Select "Edit a connection"
+* select your WiFi (adapter) and name it "Hotspot"
+* change the SSID to for example "AnchorRemote"
+* change the mode to "<Access Point>"
+* set security to "<WPA & WPA2 Personal>"
+* set a *password* and select <OK>.
+Documentation about nmtui can be found here https://variwiki.com/index.php?title=Wifi_NetworkManager#Configuring_WiFi_Access_Point
+
+Launch Flask app at startup
+---------------------------
+After you have installed the Python code on your Raspberri Pi, configure it to run the application at startup. Enter the command ``crontab -e`` and add the following line:
+``@reboot sleep 20 && sudo python3 /home/<username>/run_anchor.py`` where you replace <username> with your username.
+
+Find the process with ``htop`` or ``ps -U root -u root u | grep py``
