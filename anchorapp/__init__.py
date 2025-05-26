@@ -2,7 +2,7 @@
     This app will allow you to remotely control your anchor from your mobile phone. """
 
 __author__ = 'Vincent Verheul'
-__version__ = '2025-05-24'
+__version__ = '2025-05-26'
 
 import sys
 import logging
