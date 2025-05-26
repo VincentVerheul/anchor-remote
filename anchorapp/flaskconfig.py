@@ -4,6 +4,8 @@ import platform
 class FlaskConfig:
     SECRET_KEY = '--your-random-secret-key-used-in-CRSF-protection--'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///anchorapp.db'
+    SESSION_COOKIE_SECURE = False
+    PERMANENT_SESSION_LIFETIME = timedelta(hours=48)
 
     # Server name and database path
     prod_server = 'rpi5'                                        # update to reflect your setup! (Raspberri Pi system name)
