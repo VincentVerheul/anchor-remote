@@ -12,7 +12,7 @@ from ..models.db_model import ConfigBoat, Site, SiteEvent, Action  # User, Confi
 from ..flaskconfig import FlaskConfig
 from .util import (Glob, visitor_ip, set_visitor_control, in_control, get_user, get_route,
                    is_number, write_event, update_event, run_os_command, cpu_temperature)
-from .forms import ConfigAppForm, ConfigBoatForm, HomeForm, TargetForm, SiteSelectForm
+from ..models.forms import ConfigAppForm, ConfigBoatForm, HomeForm, TargetForm, SiteSelectForm
 from .windlass import relay
 
 
@@ -54,6 +54,9 @@ def temp_monitor_thread():
         relay.connect()
     temp_c = 0.0
     while relay.connected and temp_c > -1.0:
+        if not Glob.cpu_temp_monitor:
+            print('cpu_temp_monitor is False, sleep 60 secs')
+            sleep(60)
         temp_c = cpu_temperature()
         if temp_c >= Glob.cpu_temp_high and not relay.rpi_fan_switch.is_active:
             relay.rpi_fan_switch.on()
@@ -479,6 +482,7 @@ def config_app():
         form.process(obj=Glob.app_config)
     elif form.validate_on_submit():
         form.populate_obj(Glob.app_config)
+        Glob.cpu_temp_monitor = Glob.app_config.cpu_temp_monitor
         Glob.tz_hour_adjust = Glob.app_config.tz_hour_adjust
         Glob.cpu_temp_target = Glob.app_config.cpu_temp_target
         Glob.cpu_temp_high = Glob.app_config.cpu_temp_high
@@ -489,6 +493,9 @@ def config_app():
             db.session.add(Glob.boat_config)
             db.session.commit()
             Glob.app_config.boat_id = Glob.boat_config.id
+        if not Glob.cpu_temp_monitor:
+            if relay is not None and relay.connected:
+                relay.rpi_fan_switch.off()
         Glob.app_config.time_stamp = Glob.ts_adjusted()
         db.session.add(Glob.app_config)
         db.session.commit()
