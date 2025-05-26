@@ -84,6 +84,10 @@
             <div class="col-md-4">
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">CPU temperature</legend>
+                    <div class="mb-3 form-check form-switch" title = "Disable when no fan installed">
+                        {{ form.cpu_temp_monitor.label(class="form-check-label") }} &nbsp &nbsp
+                        {{ form.cpu_temp_monitor(class="form-check-input") }}
+                    </div>
                     <div class="mb-3">
                         {{ form.cpu_temp_target.label(class="form-control-label") }}
                         {% if form.cpu_temp_target.errors %}
