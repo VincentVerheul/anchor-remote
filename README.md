@@ -77,7 +77,7 @@ Hardware
 * A relais board with at least two relais units. If you have three units, you can also drive a fan to cool the CPU.
 * A length of electrical cable (low voltage, low power) with three to five wires. Three to connect to the solenoid and an additional two to connect to the 12 / 24 power if you want to use the boat power instead of a 5 volt powerbank. 
 * Optional : A housing to protect the combined computer board & relais board.
-* Optional : A UBEC: DC/DC Step-Down Buck converter if you want to use the boat 12 or 24 volt power. It will convert down 5 volt that your computer board needs. Otherwise use a (phone) powerbank.
+* Optional : A UBEC: DC/DC Step-Down Buck converter if you want to use the boat 12 or 24 volt power. It will convert down to 5 volt that your computer board needs. Otherwise use a (phone) powerbank.
 * Optional : A connector & socket if you want to be able to detach the wires that connect your computer board to the boat. Three pins if you only connect to the solenoid (common, up and down). Five pins if you also connect to the 12 or 24 volt power of the boat. Or even four pins, because the ‘common’ connection will usually be the plus 12 / 24 volt line.
 * Optional : A connector that can be plugged into the socket where the wired anchor remote control is connected. Alternatively open a pannel on the inside of the boat to connect the wires directly to the solenoid and 12 / 24 volt power.
 * Optional : Real Time Clock (RTC) rechargeable battery to keep the clock running while powered-off.
@@ -92,7 +92,7 @@ On the Raspberri Pi (command line) issue the following command to start an inter
 * Select "Edit a connection"
 * select your WiFi (adapter) and name it "Hotspot"
 * change the SSID to for example "AnchorRemote"
-* change the mode to "<Access Point>"
+* change the mode to "Access Point"
 * set security to "<WPA & WPA2 Personal>"
 * set a *password* and select <OK>.
 Documentation about nmtui can be found here https://variwiki.com/index.php?title=Wifi_NetworkManager#Configuring_WiFi_Access_Point
@@ -100,6 +100,6 @@ Documentation about nmtui can be found here https://variwiki.com/index.php?title
 Launch Flask app at startup
 ---------------------------
 After you have installed the Python code on your Raspberri Pi, configure it to run the application at startup. Enter the command ``crontab -e`` and add the following line:
-``@reboot sleep 20 && sudo python3 /home/<username>/run_anchor.py`` where you replace <username> with your username.
+``@reboot sleep 20 && sudo python3 /home/<username>/run_anchor.py`` where you replace *username* with your username.
 
 Find the process with ``htop`` or ``ps -U root -u root u | grep py``
